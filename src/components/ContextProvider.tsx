@@ -40,9 +40,7 @@ export default class ContextProvider extends React.Component<ContextProviderProp
   }
 
   prepareCollectionUrl(url: string): string {
-    return encodeURIComponent(
-      url.replace(this.props.catalogBase + "/", "").replace(/\/$/, "").replace(/^\//, "")
-    );
+    return encodeURIComponent(url);
   }
 
   prepareBookUrl(url: string): string {

@@ -66,13 +66,9 @@ export default class CatalogHandler extends React.Component<CatalogHandlerProps,
 }
 
 export function expandCollectionUrl(catalogBase: string, url: string): string {
-  return url ?
-    catalogBase + "/" + url :
-    url;
+  return url;
 }
 
 export function expandBookUrl(catalogBase: string, url: string): string {
-  return url ?
-    catalogBase + "/works/" + url :
-    url;
+  return url;
 }
