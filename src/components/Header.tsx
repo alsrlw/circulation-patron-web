@@ -54,11 +54,7 @@ export default class Header extends React.Component<HeaderProps, any> {
               </li>
             ) }
             <li>
-              <CatalogLink
-                collectionUrl={this.context.homeUrl}
-                bookUrl={null}>
-                Catalog
-              </CatalogLink>
+              <a href={"/collection" + this.context.homeUrl} title="Catalog">Catalog</a>
             </li>
             { this.props.loansUrl && this.props.isSignedIn &&
               <li>
