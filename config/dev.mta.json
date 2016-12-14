@@ -1,6 +1,6 @@
 {
   "theme": "./src/themes/openebooks.scss",
-  "homeUrl": "/http%3A%2F%2Fdev-mta.nypl.org%2Findex.xml",
+  "homeUrl": "/http%3A%2F%2Fdev-mta.nypl.org%2Fopen_open_demo%2Findex.xml",
   "catalogBase": "http://dev-mta.nypl.org/",
   "catalogName": "Instant Classics",
   "appName": "SimplyE",
