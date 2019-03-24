@@ -10,3 +10,5 @@ Adding another change to test actual development server webhook processor.
 Okay, a second dev server test is required.
 
 Fixed branch reference variable. A third dev server test push.
+
+Fixed container networking configuration. A fourth dev server test push.
