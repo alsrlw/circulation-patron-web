@@ -4,18 +4,19 @@ import { HeaderProps } from "opds-web-client/lib/components/Root";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { NavigateContext } from "opds-web-client/lib/interfaces";
 import { LibraryData } from "../interfaces";
+import * as PropTypes from "prop-types";
 
 export interface HeaderContext extends NavigateContext {
   library: LibraryData;
 }
 
-export default class Header extends React.Component<HeaderProps, void> {
+export default class Header extends React.Component<HeaderProps, {}> {
   context: HeaderContext;
 
   static contextTypes = {
-    library: React.PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired,
-    pathFor: React.PropTypes.func.isRequired,
+    library: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
+    pathFor: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -60,12 +61,12 @@ export default class Header extends React.Component<HeaderProps, void> {
             }
             { this.props.loansUrl && this.props.isSignedIn &&
               <li>
-                <a href="#" onClick={this.signOut}>Sign Out</a>
+                <a role="button" onClick={this.signOut}>Sign Out</a>
               </li>
             }
             { this.props.loansUrl && !this.props.isSignedIn &&
               <li>
-                <a href="#" onClick={this.signIn}>Sign In</a>
+                <a role="button" onClick={this.signIn}>Sign In</a>
               </li>
             }
           </Nav>

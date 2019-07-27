@@ -42,7 +42,7 @@ export default class LibraryDataCache {
 
   /**
     Create a LibraryDataCache for a registry or from a configuration file.
-    
+
     registryBase: The base URL for a library registry.
     expirationSeconds: The number of seconds to cache registry entries and auth documents.
     config: A pre-configured mapping from library paths to circulation manager URLs.
@@ -73,29 +73,36 @@ export default class LibraryDataCache {
   }
 
   getDataFromAuthDocumentAndCatalog(authDocument: AuthDocument, catalog: OPDSFeed) {
-    let catalogName = authDocument["title"];
-    let logoUrl;
-    for (const link of authDocument.links) {
-      if (link.rel === "logo") {
-        logoUrl = link.href;
-        break;
-      }
-    }
-    let colors = authDocument["web_color_scheme"];
 
-    let headerLinks = [];
-    for (const link of catalog["links"]) {
-      if (link.role === "navigation") {
-        headerLinks.push(link);
-      }
-    }
-
-    return {
-      catalogName,
-      logoUrl,
-      colors,
-      headerLinks
+    let data = {
+      catalogName:  authDocument["title"],
+      colors:       authDocument["web_color_scheme"],
+      logoUrl:      null,
+      headerLinks:  [],
+      cssLinks:     []
     };
+
+    for (const link of authDocument.links) {
+
+      if (link.rel === "logo") {
+        data.logoUrl = link.href;
+
+      } else if (link.rel === "stylesheet") {
+        data.cssLinks.push(link);
+
+      }
+
+    }
+
+    for (const link of catalog["links"]) {
+
+      if (link.role === "navigation") {
+        data.headerLinks.push(link);
+      }
+
+    }
+
+    return data;
 
   }
 
@@ -181,10 +188,10 @@ export default class LibraryDataCache {
     try {
       const registryResponse = await fetch(libraryUrl);
       const registryCatalog = await registryResponse.json();
-      const registryEntry = registryCatalog.catalogs[0];
       if (!registryCatalog.catalogs || registryCatalog.catalogs.length !== 1) {
         throw "Registry did not return a catalog for this library id: " + library;
       }
+      const registryEntry = registryCatalog.catalogs[0];
       return registryEntry;
     } catch (error) {
       console.warn(error);
