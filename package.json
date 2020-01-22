@@ -112,7 +112,8 @@
     "styled-system": "^5.1.2",
     "theme-ui": "^0.2.46",
     "tinycolor2": "^1.4.1",
-    "universal-url": "^1.0.1"
+    "universal-url": "^1.0.1",
+    "webpack-merge": "^4.2.1"
   },
   "husky": {
     "hooks": {
