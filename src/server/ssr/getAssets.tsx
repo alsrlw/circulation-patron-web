@@ -8,7 +8,6 @@ import isDevelopment from "../isDevelopment";
 const webpackConfig = isDevelopment
   ? require("../../../webpack.dev.config.js")
   : require("../../../webpack.prod.config.js");
-
 /**
  * Assets are the files we need to link to in our HTML,
  * like css and js files. Where we get them now depends
