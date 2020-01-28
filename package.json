@@ -9,19 +9,18 @@
   "author": "NYPL",
   "license": "Apache-2.0",
   "scripts": {
+    "prepare": "tsc && npm run build-prod",
     "lint": "npm run lint:js && npm run lint:sass",
     "lint:js": "./node_modules/.bin/eslint -c .eslintrc.js src/**/*.ts src/**/*.tsx",
     "lint:js:fix": "./node_modules/.bin/eslint -c .eslintrc.js src/**/*.ts src/**/*.tsx --fix",
     "lint:sass": "sass-lint -c .sass-lint.yml -v -q",
     "test": "npm run lint:js && tsc && cp -r src/stylesheets lib && mocha --require lib/testHelper.js lib/__tests__/*.js lib/**/__tests__/*.js lib/**/**/__tests__/*.js",
-    "build:server": "node_modules/typescript/bin/tsc && cp -r src/stylesheets lib",
-    "build:client:prod": "cp -r src/stylesheets lib && webpack -p --progress --display-modules --config webpack.prod.config",
+    "build:server": "rm -rf dist && mkdir dist && cp node_modules/bootstrap/dist/css/* dist && cp -r src/stylesheets lib",
+    "build:client:prod": "cp -r src/stylesheets lib && UV_THREADPOOL_SIZE=128 webpack -p --progress --display-modules --config webpack.prod.config",
     "build-prod": "npm run build:server && npm run build:client:prod",
     "start": "NODE_ENV=production node lib/server/index.js",
-    "start:amigos": "SIMPLIFIED_CATALOG_BASE=http://simplye-dev-cm.amigos.org/xyzlib node lib/server/index.js",
     "prod": "npm run build:server && npm run build:client:prod && NODE_ENV=production npm run start",
     "dev": "npm run build:server && NODE_ENV=development npm run start",
-    "prod:amigos": "npm run build:server && npm run build:client:prod",
     "dev:amigos": "npm run build:server && NODE_ENV=development SIMPLIFIED_CATALOG_BASE=http://simplye-dev-cm.amigos.org/xyzlib node lib/server/index.js",
     "generate-icons": "npx @svgr/cli --template src/icons/_template.js --typescript --icon --ext tsx -d src/icons src/icons"
   },
@@ -67,6 +66,7 @@
     "lint-staged": "^9.5.0",
     "mini-css-extract-plugin": "^0.5.0",
     "mocha": "^5.2.0",
+    "moment": "^2.24.0",
     "node-sass": "4.13.0",
     "prettier": "1.19.1",
     "react-hot-loader": "^4.12.16",
@@ -96,8 +96,6 @@
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
     "jsdom": "^9.4.1",
-    "mini-css-extract-plugin": "^0.5.0",
-    "moment": "^2.24.0",
     "opds-web-client": "^0.3.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -114,8 +112,6 @@
     "theme-ui": "^0.3.1",
     "tinycolor2": "^1.4.1",
     "universal-url": "^1.0.1",
-    "webpack": "^4.29.6",
-    "webpack-merge": "^4.2.1"
   },
   "husky": {
     "hooks": {
