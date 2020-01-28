@@ -111,7 +111,7 @@
     "styled-system": "^5.1.2",
     "theme-ui": "^0.3.1",
     "tinycolor2": "^1.4.1",
-    "universal-url": "^1.0.1",
+    "universal-url": "^1.0.1"
   },
   "husky": {
     "hooks": {
