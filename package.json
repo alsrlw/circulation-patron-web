@@ -9,7 +9,7 @@
   "author": "NYPL",
   "license": "Apache-2.0",
   "scripts": {
-    "prepare": "tsc && npm run build-prod",
+    "prepare": "npm run build-prod",
     "lint": "npm run lint:js && npm run lint:sass",
     "lint:js": "./node_modules/.bin/eslint -c .eslintrc.js src/**/*.ts src/**/*.tsx",
     "lint:js:fix": "./node_modules/.bin/eslint -c .eslintrc.js src/**/*.ts src/**/*.tsx --fix",
